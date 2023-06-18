@@ -1,2 +1,2 @@
 # CW-98
-Maktab Sharif Class Work
+Maktab Sharif Class Works
