@@ -1,0 +1,43 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  .container {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .post {
+    border: 1px solid gainsboro;
+    border-radius: 16px;
+  }
+  .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 10px 0px 10px;
+    border-bottom: 1px solid #b1b1b1;
+  }
+  
+  .leftPart {
+    display: flex;
+    align-items: center;
+  
+    gap: 30px;
+  }
+  
+  .nasaIcon {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background-color: #9fc6ff;
+  }
+  
+  .rightPart {
+    width: 30px;
+    height: 30px;
+  }
+  
