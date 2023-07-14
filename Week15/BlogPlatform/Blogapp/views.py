@@ -21,3 +21,8 @@ def view_author(request):
     authors = Author.objects.all()
     context = {"authors": authors}
     return render(request, "all_author.html", context)
+
+
+def author_detail(request, pk):
+    author = get_object_or_404(Author, pk=pk)
+    return render(request, "author_detail.html", {"author": author})

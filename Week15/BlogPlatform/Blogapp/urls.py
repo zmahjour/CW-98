@@ -6,4 +6,5 @@ urlpatterns = [
     path("posts/", views.view_post),
     path("posts/<int:pk>/", views.post_detail, name="post_detail"),
     path("authors/", views.view_author),
+    path("authors/<int:pk>/", views.author_detail, name="author_detail"),
 ]
