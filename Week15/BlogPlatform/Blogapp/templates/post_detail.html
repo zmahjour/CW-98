@@ -10,9 +10,18 @@
                         <h5 class="card-title">{{ post.title }}</h5>
                         <p class="card-text">Content: {{ post.content }}</p>
                         <p class="card-text">{{ post.author }} | {{ post.publication_date }}</p>
+                        <h6 class="card-text">comments:</h6>
+                        {% for comment in post.comments.all %}
+                            <div class="card-text">
+                                <p>{{ comment.content }}</p>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 {% endblock %}
+
+
+

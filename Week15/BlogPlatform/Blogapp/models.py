@@ -22,10 +22,10 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     content = models.TextField()
     date = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return f'author: {self.author} | content: {self.content} | date: {self.date.strftime("%Y-%m-%d")}'
+        return f'post: {self.post} | comment: {self.content} | date: {self.date.strftime("%Y-%m-%d")}'

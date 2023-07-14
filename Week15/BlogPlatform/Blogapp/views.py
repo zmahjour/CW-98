@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post, Author
+from .models import Post, Author, Comment
 
 
 def home(request):
@@ -14,7 +14,8 @@ def view_post(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    return render(request, "post_detail.html", {"post": post})
+    comments = Comment.objects.filter(post=post)
+    return render(request, "post_detail.html", {"post": post, "comments": comments})
 
 
 def view_author(request):
