@@ -1,10 +1,10 @@
 from django.urls import path
-from . import views
+from .views import home, view_post, post_detail, view_author, author_detail
 
 urlpatterns = [
-    path("home/", views.home),
-    path("posts/", views.view_post),
-    path("posts/<int:pk>/", views.post_detail, name="post_detail"),
-    path("authors/", views.view_author),
-    path("authors/<int:pk>/", views.author_detail, name="author_detail"),
+    path("home/", home),
+    path("posts/", view_post),
+    path("posts/<int:pk>/", post_detail, name="post_detail"),
+    path("authors/", view_author),
+    path("authors/<int:pk>/", author_detail, name="author_detail"),
 ]

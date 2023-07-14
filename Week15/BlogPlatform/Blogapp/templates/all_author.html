@@ -2,13 +2,13 @@
 
 {% block content %}
     <div class="container">
-        <h1 class="mb-4">All Authors</h1>
+        <h3 class="mb-4">All Authors</h3>
         <div class="row">
             {% for author in authors %}
                 <div class="col-md-6">
                     <div class="card mb-3">
                         <div class="card-body">
-                            <a class="card-title" href="{% url 'author_detail' author.pk %}">{{ author.name }}</a>
+                            <h5><a class="card-title" href="{% url 'author_detail' author.pk %}">{{ author.name }}</a></h5>
                         </div>
                     </div>
                 </div>

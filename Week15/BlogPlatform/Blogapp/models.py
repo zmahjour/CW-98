@@ -16,7 +16,7 @@ class Author(models.Model):
     bio = models.TextField()
 
     def __str__(self):
-        return f"name: {self.name} | bio: {self.bio}"
+        return f"name: {self.name}"
 
 
 # class Comment(models.Model):
