@@ -14,8 +14,7 @@ def view_post(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    comments = Comment.objects.filter(post=post)
-    return render(request, "post_detail.html", {"post": post, "comments": comments})
+    return render(request, "post_detail.html", {"post": post})
 
 
 def view_author(request):
