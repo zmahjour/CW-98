@@ -19,11 +19,11 @@ class Author(models.Model):
         return f"name: {self.name} | bio: {self.bio}"
 
 
-class Comment(models.Model):
-    post = models.CharField(max_length=100)
-    author = models.CharField(max_length=100)
-    content = models.TextField()
-    date = models.DateField(auto_now_add=True)
+# class Comment(models.Model):
+#     post = models.CharField(max_length=100)
+#     author = models.CharField(max_length=100)
+#     content = models.TextField()
+#     date = models.DateField(auto_now_add=True)
 
-    def __str__(self):
-        return f'author: {self.author} | content: {self.content} | date: {self.date.strftime("%Y-%m-%d")}'
+#     def __str__(self):
+#         return f'author: {self.author} | content: {self.content} | date: {self.date.strftime("%Y-%m-%d")}'

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Post, Author
 
 
@@ -12,7 +12,12 @@ def view_post(request):
     return render(request, "all_post.html", context)
 
 
-def view_authors(request):
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, "post_detail.html", {"post": post})
+
+
+def view_author(request):
     authors = Author.objects.all()
     context = {"authors": authors}
     return render(request, "all_author.html", context)
