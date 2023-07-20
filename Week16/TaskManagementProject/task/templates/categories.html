@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="py-1 table-bordered">
+        <div class="container px-5 my-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bolder">Categories</h2>
+            </div>
+            <table class="table border-top">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                  </tr>
+                </thead>
+                {% for category in categories %}
+                    <tbody>
+                        <tr>
+                            <td>{{ category.name }}</td>
+                            <td>{{ category.description }}</td>
+                        </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
+        </div>    
+    </section>
+    <section class="py-1 border-top border-bottom">
+        <div class="container px-5 my-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bolder">Add new category</h2>
+            </div>
+            <form method="post" action="">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Category name</label>
+                    <input class="form-control" name="category_name">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" rows="3" name="description"></textarea>
+                </div>
+                <button type="submit" class="btn btn-secondary">Submit</button>
+            </form>
+        </div>
+    </section>
+{% endblock content %}
+
