@@ -14,6 +14,16 @@
                         <p class="card-text"><p class="fw-bolder">Created date:</p> {{ task.created }}</p>
                         <p class="card-text"><p class="fw-bolder">Due date:</p> {{ task.due_date }}</p>
                         <p class="card-text"><p class="fw-bolder">Category:</p> {{ task.category.name }}</p>
+
+                        <p class="card-text">
+                            <p class="fw-bolder">Tags:</p>
+                            {% for tag in task.tags.all %}
+                                <p>{{ tag.label }}</p>
+                            {% endfor %}
+                        </p>
+
+
+            
                     </div>
                     <div class="card-footer bg-white fw-bolder">
                         {{ task.status }}
