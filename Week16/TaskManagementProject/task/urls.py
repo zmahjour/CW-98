@@ -8,9 +8,9 @@ urlpatterns = [
     path("all/", views.all_tasks, name="all_tasks"),
     path("categories/", views.categories, name="categories"),
     path(
-        "addfromcategory/<int:category_id>/",
-        views.add_from_category,
-        name="add_from_category",
+        "category_detail/<int:category_id>/",
+        views.category_detail,
+        name="category_detail",
     ),
     # path("update/<int:category_id>/", views.update_category, name="update_category"),
 ]

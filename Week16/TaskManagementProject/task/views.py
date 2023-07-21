@@ -89,7 +89,7 @@ def categories(request):
         return render(request, "categories.html", {"categories": categories})
 
 
-def add_from_category(request, category_id):
+def category_detail(request, category_id):
     tag_list = Tag.objects.all()
     status_choices = dict(Task.STATUS_CHOICES)
     category = Category.objects.get(pk=category_id)
@@ -116,7 +116,7 @@ def add_from_category(request, category_id):
 
     return render(
         request,
-        "add_from_category.html",
+        "category_detail.html",
         {"category": category, "tag_list": tag_list, "status_choices": status_choices},
     )
 

@@ -13,7 +13,7 @@
                     <th class="text-center" scope="col">Description</th>
                     <th class="text-center" scope="col">Image</th>
                     <th class="text-center" scope="col">Update</th>
-                    <th class="text-center" scope="col">Add task</th>
+                    <th class="text-center" scope="col">Details</th>
                   </tr>
                 </thead>
                 {% for category in categories %}
@@ -22,8 +22,8 @@
                             <td class="text-center">{{ category.name }}</td>
                             <td class="text-center">{{ category.description }}</td>
                             <td class="text-center">{{ category.image }}</td>
-                            <td class="text-center">update</td>
-                            <td class="text-center"><a class="link-secondary link-underline-opacity-0 link-underline-opacity-50-hover" href="{% url 'add_from_category' category.pk %}">+</a></td>
+                            <td class="text-center">+</td>
+                            <td class="text-center"><a class="link-secondary link-underline-opacity-0 link-underline-opacity-50-hover" href="{% url 'category_detail' category.pk %}">+</a></td>
                         </tr>
                     </tbody>
                 {% endfor %}
