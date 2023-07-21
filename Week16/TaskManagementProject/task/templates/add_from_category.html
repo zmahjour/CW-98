@@ -21,6 +21,10 @@
                     <input type="date" class="form-control" name="due_date">
                 </div>
                 <div class="mb-3">
+                    <label class="form-label">File</label>
+                    <input class="form-control" type="file" name="file">
+                </div>
+                <div class="mb-3">
                     <label class="form-label">Status</label>
                     <select class="form-control" name='status'>
                         {% for key, value in status_choices.items %}

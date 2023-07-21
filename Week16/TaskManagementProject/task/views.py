@@ -93,6 +93,7 @@ def add_from_category(request, category_id):
         title = request.POST.get("title")
         description = request.POST.get("description")
         due_date = request.POST.get("due_date")
+        file = request.POST.get("file")
         status = request.POST.get("status")
         tag_id_list = request.POST.getlist("tags")
         tags = [Tag.objects.get(pk=tag_id) for tag_id in tag_id_list]
@@ -101,6 +102,7 @@ def add_from_category(request, category_id):
             title=title,
             description=description,
             due_date=due_date,
+            file=file,
             status=status,
             category=category,
         )
