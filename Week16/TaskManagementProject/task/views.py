@@ -93,6 +93,7 @@ def category_detail(request, category_id):
     tag_list = Tag.objects.all()
     status_choices = dict(Task.STATUS_CHOICES)
     category = Category.objects.get(pk=category_id)
+    tasks = Task.objects.filter(category=Category.objects.get(pk=category_id))
 
     if request.method == "POST":
         title = request.POST.get("title")
@@ -112,12 +113,17 @@ def category_detail(request, category_id):
             category=category,
         )
         new_task.tags.set(tags)
-        return redirect("categories")
+        return redirect("category_detail", category_id=category_id)
 
     return render(
         request,
         "category_detail.html",
-        {"category": category, "tag_list": tag_list, "status_choices": status_choices},
+        {
+            "category": category,
+            "tag_list": tag_list,
+            "status_choices": status_choices,
+            "tasks": tasks,
+        },
     )
 
 
