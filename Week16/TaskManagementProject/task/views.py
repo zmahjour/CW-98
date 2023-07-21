@@ -73,3 +73,33 @@ def categories(request):
     elif request.method == "GET":
         categories = Category.objects.all()
         return render(request, "categories.html", {"categories": categories})
+
+
+def add_from_category(request, category_id):
+    tag_list = Tag.objects.all()
+    status_choices = dict(Task.STATUS_CHOICES)
+    category = Category.objects.get(pk=category_id)
+
+    if request.method == "POST":
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        due_date = request.POST.get("due_date")
+        status = request.POST.get("status")
+        tag_id_list = request.POST.getlist("tags")
+        tags = [Tag.objects.get(pk=tag_id) for tag_id in tag_id_list]
+
+        new_task = Task.objects.create(
+            title=title,
+            description=description,
+            due_date=due_date,
+            status=status,
+            category=category,
+        )
+        new_task.tags.set(tags)
+        return redirect("categories")
+
+    return render(
+        request,
+        "add_from_category.html",
+        {"category": category, "tag_list": tag_list, "status_choices": status_choices},
+    )

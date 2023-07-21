@@ -9,15 +9,17 @@
             <table class="table border-top">
                 <thead>
                   <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
+                    <th class="text-center" scope="col">Name</th>
+                    <th class="text-center" scope="col">Description</th>
+                    <th class="text-center" scope="col">Add task</th>
                   </tr>
                 </thead>
                 {% for category in categories %}
                     <tbody>
                         <tr>
-                            <td>{{ category.name }}</td>
-                            <td>{{ category.description }}</td>
+                            <td class="text-center">{{ category.name }}</td>
+                            <td class="text-center">{{ category.description }}</td>
+                            <td class="text-center"><a class="link-secondary link-underline-opacity-0 link-underline-opacity-50-hover" href="{% url 'add_from_category' category.pk %}">+</a></td>
                         </tr>
                     </tbody>
                 {% endfor %}
