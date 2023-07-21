@@ -12,6 +12,7 @@
                     <th scope="col" class="text-center">Title</th>
                     <th scope="col" class="text-center">Created date</th>
                     <th scope="col" class="text-center">Due date</th>
+                    <th scope="col" class="text-center">File</th>
                     <th scope="col" class="text-center">Status</th>
                     <th scope="col" class="text-center">Details</th>
                   </tr>
@@ -22,6 +23,7 @@
                             <th class="text-center">{{ task.title }}</th>
                             <td class="text-center">{{ task.created }}</td>
                             <td class="text-center">{{ task.due_date }}</td>
+                            <td class="text-center">{{ task.file }}</td>
                             <td class="text-center">{{ task.status }}</td>
                             <td class="text-center"><a class="link-secondary link-underline-opacity-0 link-underline-opacity-50-hover" href="{% url 'task_detail' task.pk %}">View details</a></td>
                         </tr>
@@ -48,6 +50,10 @@
                 <div class="mb-3">
                     <label class="form-label">Due date</label>
                     <input type="date" class="form-control" name="due_date">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">File</label>
+                    <input class="form-control" type="file" name="file">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Status</label>

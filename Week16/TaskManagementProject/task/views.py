@@ -39,6 +39,7 @@ def all_tasks(request):
         title = request.POST.get("title")
         description = request.POST.get("description")
         due_date = request.POST.get("due_date")
+        file = request.POST.get("file")
         status = request.POST.get("status")
         category_id = request.POST.get("cat")
         category = Category.objects.get(pk=category_id)
@@ -49,6 +50,7 @@ def all_tasks(request):
             title=title,
             description=description,
             due_date=due_date,
+            file=file,
             status=status,
             category=category,
         )
@@ -73,7 +75,8 @@ def categories(request):
     if request.method == "POST":
         name = request.POST.get("category_name")
         description = request.POST.get("description")
-        Category.objects.create(name=name, description=description)
+        image = request.POST.get("image")
+        Category.objects.create(name=name, description=description, image=image)
         return redirect("categories")
 
     elif request.method == "GET":

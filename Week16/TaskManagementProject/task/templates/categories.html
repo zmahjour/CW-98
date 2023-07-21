@@ -11,6 +11,7 @@
                   <tr>
                     <th class="text-center" scope="col">Name</th>
                     <th class="text-center" scope="col">Description</th>
+                    <th class="text-center" scope="col">Image</th>
                     <th class="text-center" scope="col">Add task</th>
                   </tr>
                 </thead>
@@ -19,6 +20,7 @@
                         <tr>
                             <td class="text-center">{{ category.name }}</td>
                             <td class="text-center">{{ category.description }}</td>
+                            <td class="text-center">{{ category.image }}</td>
                             <td class="text-center"><a class="link-secondary link-underline-opacity-0 link-underline-opacity-50-hover" href="{% url 'add_from_category' category.pk %}">+</a></td>
                         </tr>
                     </tbody>
@@ -40,6 +42,10 @@
                 <div class="mb-3">
                     <label class="form-label">Description</label>
                     <textarea class="form-control" rows="3" name="description"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Image</label>
+                    <input class="form-control" type="file" name="image">
                 </div>
                 <button type="submit" class="btn btn-secondary">Submit</button>
             </form>
