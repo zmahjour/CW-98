@@ -20,8 +20,14 @@ def search(request):
 
 
 def task_detail(request, task_id):
-    task = Task.objects.get(pk=task_id)
-    return render(request, "task_detail.html", {"task": task})
+    if request.method == "POST":
+        label = request.POST.get("tag")
+        Tag.objects.create(label=label)
+        return redirect("all_tasks")
+
+    elif request.method == "GET":
+        task = Task.objects.get(pk=task_id)
+        return render(request, "task_detail.html", {"task": task})
 
 
 def all_tasks(request):
