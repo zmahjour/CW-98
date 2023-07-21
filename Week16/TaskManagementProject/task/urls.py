@@ -12,5 +12,9 @@ urlpatterns = [
         views.category_detail,
         name="category_detail",
     ),
-    # path("update/<int:category_id>/", views.update_category, name="update_category"),
+    path(
+        "update_category/<int:category_id>/",
+        views.update_category,
+        name="update_category",
+    ),
 ]

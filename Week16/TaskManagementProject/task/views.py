@@ -127,5 +127,16 @@ def category_detail(request, category_id):
     )
 
 
-def update_category(request):
-    pass
+def update_category(request, category_id):
+    category = Category.objects.get(pk=category_id)
+    if request.method == "POST":
+        name = request.POST.get("category_name")
+        description = request.POST.get("description")
+        image = request.POST.get("image")
+        Category.objects.filter(pk=category_id).update(
+            name=name, description=description, image=image
+        )
+        return redirect("categories")
+
+    elif request.method == "GET":
+        return render(request, "category_detail.html", {"category": category})

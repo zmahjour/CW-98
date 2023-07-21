@@ -36,6 +36,30 @@
     <section class="py-1 border-top border-bottom">
         <div class="container px-5 my-5">
             <div class="text-center mb-5">
+                <h2 class="fw-bolder">Update category</h2>
+            </div>
+            <form method="post" action="{% url 'update_category' category.pk %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label" selected>Category name</label>
+                    <input class="form-control" name="category_name" value="{{ category.name }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" rows="3" name="description">{{ category.description }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Image</label>
+                    <input class="form-control" type="file" name="image">
+                </div>
+                <button type="submit" class="btn btn-secondary">Update</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="py-1 border-top border-bottom">
+        <div class="container px-5 my-5">
+            <div class="text-center mb-5">
                 <h3 class="fw-bolder">Add task</h3>
             </div>
             <form method="post" action="">
