@@ -22,8 +22,13 @@ def search(request):
 def task_detail(request, task_id):
     if request.method == "POST":
         label = request.POST.get("tag")
-        Tag.objects.create(label=label)
-        return redirect("all_tasks")
+        if not Tag.objects.filter(label=label).exists():
+            Tag.objects.create(label=label)
+        tag = Tag.objects.get(label=label)
+        task = Task.objects.get(pk=task_id)
+        task.tags.add(tag)
+
+        return redirect("task_detail", task_id=task_id)
 
     elif request.method == "GET":
         task = Task.objects.get(pk=task_id)
@@ -114,3 +119,7 @@ def add_from_category(request, category_id):
         "add_from_category.html",
         {"category": category, "tag_list": tag_list, "status_choices": status_choices},
     )
+
+
+def update_category(request):
+    pass
