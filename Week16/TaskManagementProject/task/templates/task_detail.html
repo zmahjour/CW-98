@@ -41,6 +41,57 @@
             </form>
         </div>    
     </section>
+    <section class="py-1 border-bottom">
+        <div class="container px-5 my-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bolder">Update task</h2>
+            </div>
+            <form method="post" action="{% url 'update_task' task.pk %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Task title</label>
+                    <input class="form-control" name="title" value="{{ task.title }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" rows="3" name="description">{{ task.description }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Due date</label>
+                    <input type="date" class="form-control" name="due_date" value="{{ task.due_date|date:'Y-m-d' }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">File</label>
+                    <input class="form-control" type="file" name="file">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Status</label>
+                    <select class="form-control" name="status">
+                        {% for key, value in status_choices.items %}
+                            <option value='{{ key }}'>{{ value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Category</label>
+                    <select class="form-control" name='cat'>
+                        {% for cat in cat_list %}
+                            <option value='{{ cat.pk }}'>{{ cat.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Tags</label>
+                    <select class="form-control" name='tags' multiple>
+                        {% for tag in tag_list %}
+                            <option value="{{ tag.pk }}">{{ tag.label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-secondary">Submit</button>
+            </form>
+        </div>
+    </section>
     
 {% endblock content %}
 

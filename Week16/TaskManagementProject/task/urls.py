@@ -17,4 +17,5 @@ urlpatterns = [
         views.update_category,
         name="update_category",
     ),
+    path("update_task/<int:task_id>/", views.update_task, name="update_task"),
 ]

@@ -25,7 +25,7 @@
                             <td class="text-center">{{ task.due_date }}</td>
                             <td class="text-center">{{ task.file }}</td>
                             <td class="text-center">{{ task.status }}</td>
-                            <td class="text-center"><a class="link-secondary link-underline-opacity-0 link-underline-opacity-50-hover" href="{% url 'task_detail' task.pk %}">View details</a></td>
+                            <td class="text-center"><a class="link-secondary link-underline-opacity-0 link-underline-opacity-50-hover" href="{% url 'task_detail' task.pk %}">+</a></td>
                         </tr>
                     </tbody>
                 {% endfor %}

@@ -35,7 +35,7 @@
             <div class="text-center mb-5">
                 <h2 class="fw-bolder">Add new category</h2>
             </div>
-            <form method="post" action="">
+            <form method="post" action="{% url 'categories' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label class="form-label">Category name</label>

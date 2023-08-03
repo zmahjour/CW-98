@@ -80,7 +80,7 @@ def categories(request):
     if request.method == "POST":
         name = request.POST.get("category_name")
         description = request.POST.get("description")
-        image = request.POST.get("image")
+        image = request.FILES.get("image")
         Category.objects.create(name=name, description=description, image=image)
         return redirect("categories")
 
@@ -140,3 +140,43 @@ def update_category(request, category_id):
 
     elif request.method == "GET":
         return render(request, "category_detail.html", {"category": category})
+
+
+def update_task(request, task_id):
+    if request.method == "POST":
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        due_date = request.POST.get("due_date")
+        file = request.POST.get("file")
+        status = request.POST.get("status")
+        category_id = request.POST.get("cat")
+        category = Category.objects.get(pk=category_id)
+        tag_id_list = request.POST.getlist("tags")
+        tags = [Tag.objects.get(pk=tag_id) for tag_id in tag_id_list]
+
+        new_task = Task.objects.update(
+            title=title,
+            description=description,
+            due_date=due_date,
+            file=file,
+            status=status,
+            category=category,
+        )
+        new_task.tags.set(tags)
+        return redirect("task_detail", task_id=task_id)
+
+    else:
+        cat_list = Category.objects.all()
+        tag_list = Tag.objects.all()
+        status_choices = dict(Task.STATUS_CHOICES)
+        task = Task.objects.get(pk=task_id)
+        return render(
+            request,
+            "task_detail.html",
+            {
+                "cat_list": cat_list,
+                "tag_list": tag_list,
+                "status_choices": status_choices,
+                "task": task,
+            },
+        )
