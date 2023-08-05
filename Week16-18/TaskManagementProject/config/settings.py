@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "task",
-    "user",
 ]
 
 MIDDLEWARE = [
@@ -128,11 +127,3 @@ import os
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-
-
-AUTH_USER_MODEL = "user.CustomUser"
-
-AUTHENTICATION_BACKENDS = [
-    "user.backends.EmailBackend",
-    "django.contrib.auth.backends.ModelBackend",
-]
