@@ -1,5 +1,4 @@
 from django.db import models
-from user.models import CustomUser
 
 
 class Category(models.Model):
@@ -27,7 +26,6 @@ class Task(models.Model):
         (IN_PROGRESS, "In progress"),
         (COMPLETED, "Completed"),
     ]
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True)
     created = models.DateField(auto_now_add=True)
