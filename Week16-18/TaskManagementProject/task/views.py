@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.db.models import Q
 from django.shortcuts import redirect
-from task.models import Task, Category, Tag
+from .models import Task, Category, Tag
+from .forms import TaskUpdateForm
 
 
 def home(request):
@@ -20,19 +21,29 @@ def search(request):
 
 
 def task_detail(request, task_id):
-    if request.method == "POST":
-        label = request.POST.get("tag")
-        if not Tag.objects.filter(label=label).exists():
-            Tag.objects.create(label=label)
-        tag = Tag.objects.get(label=label)
-        task = Task.objects.get(pk=task_id)
-        task.tags.add(tag)
+    form_class = TaskUpdateForm
+    task = Task.objects.get(pk=task_id)
 
-        return redirect("task_detail", task_id=task_id)
+    if request.method == "POST":
+        if "tag_submit" in request.POST:
+            label = request.POST.get("tag")
+            if not Tag.objects.filter(label=label).exists():
+                Tag.objects.create(label=label)
+            tag = Tag.objects.get(label=label)
+            task.tags.add(tag)
+
+            return redirect("task_detail", task_id=task_id)
+
+        if "update_submit" in request.POST:
+            form = form_class(request.POST, instance=task)
+            if form.is_valid():
+                form.save()
+                return redirect("task_detail", task_id=task_id)
+            return render(request, "task_detail.html", {"form": form})
 
     elif request.method == "GET":
-        task = Task.objects.get(pk=task_id)
-        return render(request, "task_detail.html", {"task": task})
+        form = form_class(instance=task)
+        return render(request, "task_detail.html", {"task": task, "form": form})
 
 
 def all_tasks(request):
@@ -140,43 +151,3 @@ def update_category(request, category_id):
 
     elif request.method == "GET":
         return render(request, "category_detail.html", {"category": category})
-
-
-def update_task(request, task_id):
-    if request.method == "POST":
-        title = request.POST.get("title")
-        description = request.POST.get("description")
-        due_date = request.POST.get("due_date")
-        file = request.POST.get("file")
-        status = request.POST.get("status")
-        category_id = request.POST.get("cat")
-        category = Category.objects.get(pk=category_id)
-        tag_id_list = request.POST.getlist("tags")
-        tags = [Tag.objects.get(pk=tag_id) for tag_id in tag_id_list]
-
-        new_task = Task.objects.update(
-            title=title,
-            description=description,
-            due_date=due_date,
-            file=file,
-            status=status,
-            category=category,
-        )
-        new_task.tags.set(tags)
-        return redirect("task_detail", task_id=task_id)
-
-    else:
-        cat_list = Category.objects.all()
-        tag_list = Tag.objects.all()
-        status_choices = dict(Task.STATUS_CHOICES)
-        task = Task.objects.get(pk=task_id)
-        return render(
-            request,
-            "task_detail.html",
-            {
-                "cat_list": cat_list,
-                "tag_list": tag_list,
-                "status_choices": status_choices,
-                "task": task,
-            },
-        )

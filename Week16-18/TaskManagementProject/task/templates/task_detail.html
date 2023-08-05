@@ -4,7 +4,7 @@
     <section class="py-1 border-top border-bottom">
         <div class="container px-5 my-5">
             <div class="row gx-5 justify-content-center">
-                <div class="card text-center col-xl-3">
+                <div class="card text-center col-xl-6">
                     <h4 class="card-header bg-white fw-bolder py-3">
                         {{ task.title }}
                     </h4>
@@ -37,7 +37,7 @@
                     <label class="form-label">Label</label>
                     <input class="form-control" name="tag">
                 </div>
-                <button type="submit" class="btn btn-secondary mb-5">Submit</button>
+                <button type="submit" name="tag_submit" class="btn btn-secondary mb-5">Submit</button>
             </form>
         </div>    
     </section>
@@ -46,49 +46,10 @@
             <div class="text-center mb-5">
                 <h2 class="fw-bolder">Update task</h2>
             </div>
-            <form method="post" action="{% url 'update_task' task.pk %}">
+            <form method="post" action="">
                 {% csrf_token %}
-                <div class="mb-3">
-                    <label class="form-label">Task title</label>
-                    <input class="form-control" name="title" value="{{ task.title }}">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Description</label>
-                    <textarea class="form-control" rows="3" name="description">{{ task.description }}</textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Due date</label>
-                    <input type="date" class="form-control" name="due_date" value="{{ task.due_date|date:'Y-m-d' }}">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">File</label>
-                    <input class="form-control" type="file" name="file">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Status</label>
-                    <select class="form-control" name="status">
-                        {% for key, value in status_choices.items %}
-                            <option value='{{ key }}'>{{ value }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Category</label>
-                    <select class="form-control" name='cat'>
-                        {% for cat in cat_list %}
-                            <option value='{{ cat.pk }}'>{{ cat.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Tags</label>
-                    <select class="form-control" name='tags' multiple>
-                        {% for tag in tag_list %}
-                            <option value="{{ tag.pk }}">{{ tag.label }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-secondary">Submit</button>
+                {{ form }}
+                <button type="submit" name="update_submit" class="btn btn-secondary">Submit</button>
             </form>
         </div>
     </section>
