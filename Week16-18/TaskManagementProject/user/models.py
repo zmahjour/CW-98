@@ -10,4 +10,4 @@ class CustomUser(AbstractBaseUser):
     last_name = models.CharField(max_length=50)
     photo = models.ImageField(upload_to="user_images/", blank=True, null=True)
 
-    objects = CustomUserManager
+    objects = CustomUserManager()
