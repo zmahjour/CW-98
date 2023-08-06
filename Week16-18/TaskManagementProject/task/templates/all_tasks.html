@@ -15,6 +15,7 @@
                     <th scope="col" class="text-center">File</th>
                     <th scope="col" class="text-center">Status</th>
                     <th scope="col" class="text-center">Details</th>
+                    <th scope="col" class="text-center">Delete</th>
                   </tr>
                 </thead>
                 {% for task in tasks %}
@@ -26,6 +27,7 @@
                             <td class="text-center">{{ task.file }}</td>
                             <td class="text-center">{{ task.status }}</td>
                             <td class="text-center"><a class="link-secondary link-underline-opacity-0 link-underline-opacity-50-hover" href="{% url 'task_detail' task.pk %}">+</a></td>
+                            <td class="text-center"><a class="link-secondary link-underline-opacity-0 link-underline-opacity-50-hover" href="{% url 'delete_task' task.pk %}">+</a></td>
                         </tr>
                     </tbody>
                 {% endfor %}

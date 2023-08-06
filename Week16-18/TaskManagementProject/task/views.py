@@ -156,3 +156,9 @@ def delete_category(request, category_id):
     category = get_object_or_404(Category, pk=category_id)
     category.delete()
     return redirect("categories")
+
+
+def delete_task(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+    task.delete()
+    return redirect("all_tasks")

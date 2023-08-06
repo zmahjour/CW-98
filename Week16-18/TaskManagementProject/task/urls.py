@@ -22,4 +22,5 @@ urlpatterns = [
         views.delete_category,
         name="delete_category",
     ),
+    path("delete_task/<int:task_id>/", views.delete_task, name="delete_task"),
 ]
