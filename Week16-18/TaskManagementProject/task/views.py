@@ -1,6 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
-from django.shortcuts import redirect
 from .models import Task, Category, Tag
 from .forms import TaskUpdateForm
 
@@ -151,3 +150,9 @@ def update_category(request, category_id):
 
     elif request.method == "GET":
         return render(request, "category_detail.html", {"category": category})
+
+
+def delete_category(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
+    category.delete()
+    return redirect("categories")
