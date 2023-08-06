@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
+from .managers import CustomUserManager
 
 
 class CustomUser(AbstractBaseUser):
@@ -8,3 +9,5 @@ class CustomUser(AbstractBaseUser):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     photo = models.ImageField(upload_to="user_images/", blank=True, null=True)
+
+    objects = CustomUserManager
