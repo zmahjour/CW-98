@@ -9,5 +9,6 @@ class CustomUser(AbstractBaseUser):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     photo = models.ImageField(upload_to="user_images/", blank=True, null=True)
+    is_admin = models.BooleanField(default=False)
 
     objects = CustomUserManager()
