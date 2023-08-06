@@ -48,7 +48,7 @@
             </div>
             <form method="post" action="">
                 {% csrf_token %}
-                {{ form }}
+                {{ form.as_p }}
                 <button type="submit" name="update_submit" class="btn btn-secondary">Submit</button>
             </form>
         </div>
