@@ -3,6 +3,9 @@
 
 {% block content %}
     <div class="card">
-        {{ todo }}
+        <div class="card-body" style="text-align: center;">title: {{ todo.title }}</div>
+        <div class="card-body" style="text-align: center;">{{ todo.description }}</div>
+        <div class="card-body" style="text-align: center;">{{ todo.user }}</div>
+        <div class="card-body" style="text-align: center;">{{ todo.is_completed }}</div>        
     </div>
 {% endblock %}
