@@ -9,7 +9,7 @@ class TodoMixin:
     template_name = None
 
     def dispatch(self, request, *args, **kwargs):
-        todo = Todo.objects.get(id=kwargs["id"])
+        todo = Todo.objects.get(id=kwargs["pk"])
         if not todo.user == request.user:
             raise PermissionDenied
 
