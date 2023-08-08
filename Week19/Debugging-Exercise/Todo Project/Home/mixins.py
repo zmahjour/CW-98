@@ -12,6 +12,7 @@ class TodoMixin:
         todo = Todo.objects.get(id=kwargs["pk"])
         if not todo.user == request.user:
             raise PermissionDenied
+        return render(request, self.template_name, {"todo": todo})
 
     def get(self, request, id):
         todo = Todo.objects.filter(id=id)
