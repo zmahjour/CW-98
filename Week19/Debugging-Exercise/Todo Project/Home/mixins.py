@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.core.exceptions import PermissionDenied
 from .models import Todo
 from .forms import TodoForm
 
@@ -8,18 +9,18 @@ class TodoMixin:
     template_name = None
 
     def dispatch(self, request, *args, **kwargs):
-        todo = Todo.objects.get(id=kwargs['id'])
+        todo = Todo.objects.get(id=kwargs["id"])
         if not todo.user == request.user:
             raise PermissionDenied
 
     def get(self, request, id):
         todo = Todo.objects.filter(id=id)
-        return render(request, self.template_name, {'todo': todo})
+        return render(request, self.template_name, {"todo": todo})
 
     def post(self, request, id):
         todo = Todo.objects.get(id=id)
         form = self.form_class(request.POST, instance=todo)
         if form.is_valid():
             todo.save()
-            return redirect('thank_you')
-        return render(request, self.template_name, {'todo': todo})
+            return redirect("thank_you")
+        return render(request, self.template_name, {"todo": todo})
