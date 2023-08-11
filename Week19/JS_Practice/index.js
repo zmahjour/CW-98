@@ -1,10 +1,26 @@
 
 // first_exercise
 
-var value = prompt("Enter a value:");
+// var value = prompt("Enter a value:");
 
-alert(typeof value);
+// alert(typeof value);
 
 
 // second_exercise
 
+var age = prompt("Please enter your age:");
+
+age = parseInt(age);
+
+if (age >= 0 && age <= 10) {
+    alert("child");
+}
+else if (age >= 11 && age <= 18) {
+    alert("teenager");
+}
+else if (age >= 19 && age <= 30) {
+    alert("young person");
+}
+else if (age > 30) {
+    alert("adult");
+}
