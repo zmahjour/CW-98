@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
+from django.views import View
 from .models import Task, Category, Tag
 from .forms import TaskUpdateForm
 
@@ -19,11 +20,16 @@ def search(request):
         return render(request, "search.html", {"search": search, "results": results})
 
 
-def task_detail(request, task_id):
+class TaskDetailView(View):
     form_class = TaskUpdateForm
-    task = Task.objects.get(pk=task_id)
 
-    if request.method == "POST":
+    def get(self, request, task_id):
+        task = Task.objects.get(pk=task_id)
+        form = self.form_class(instance=task)
+        return render(request, "task_detail.html", {"task": task, "form": form})
+    
+    def post(self, request, task_id):
+        task = Task.objects.get(pk=task_id)
         if "tag_submit" in request.POST:
             label = request.POST.get("tag")
             if not Tag.objects.filter(label=label).exists():
@@ -34,15 +40,11 @@ def task_detail(request, task_id):
             return redirect("task_detail", task_id=task_id)
 
         if "update_submit" in request.POST:
-            form = form_class(request.POST, instance=task)
+            form = self.form_class(request.POST, instance=task)
             if form.is_valid():
                 form.save()
                 return redirect("task_detail", task_id=task_id)
             return render(request, "task_detail.html", {"form": form})
-
-    elif request.method == "GET":
-        form = form_class(instance=task)
-        return render(request, "task_detail.html", {"task": task, "form": form})
 
 
 def all_tasks(request):
