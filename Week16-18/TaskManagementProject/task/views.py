@@ -3,6 +3,7 @@ from django.db.models import Q
 from django.views import View
 from .models import Task, Category, Tag
 from .forms import TaskUpdateForm
+from .mixins import TodoOwnerRequiredMixin
 
 
 def home(request):
@@ -20,7 +21,7 @@ def search(request):
         return render(request, "search.html", {"search": search, "results": results})
 
 
-class TaskDetailView(View):
+class TaskDetailView(TodoOwnerRequiredMixin, View):
     form_class = TaskUpdateForm
 
     def get(self, request, task_id):
