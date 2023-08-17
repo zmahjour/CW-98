@@ -23,4 +23,5 @@ urlpatterns = [
         name="delete_category",
     ),
     path("delete_task/<int:task_id>/", views.delete_task, name="delete_task"),
+    path("task_create/", views.TaskCreateView.as_view(), name="task_create"),
 ]
