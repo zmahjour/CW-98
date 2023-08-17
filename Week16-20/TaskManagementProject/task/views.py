@@ -4,7 +4,7 @@ from django.views import View
 from django.views.generic import ListView, DetailView, CreateView
 from django.urls import reverse, reverse_lazy
 from .models import Task, Category, Tag
-from .forms import TaskUpdateForm
+from .forms import TaskUpdateForm, TaskCreateForm
 from .mixins import TodoOwnerRequiredMixin
 
 
