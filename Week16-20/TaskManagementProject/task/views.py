@@ -29,7 +29,7 @@ class TaskDetailView(TodoOwnerRequiredMixin, View):
         task = Task.objects.get(pk=task_id)
         form = self.form_class(instance=task)
         return render(request, "task_detail.html", {"task": task, "form": form})
-    
+
     def post(self, request, task_id):
         task = Task.objects.get(pk=task_id)
         if "tag_submit" in request.POST:
