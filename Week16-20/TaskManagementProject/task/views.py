@@ -22,13 +22,19 @@ def search(request):
         return render(request, "search.html", {"search": search, "results": results})
 
 
-class TaskDetailView(TodoOwnerRequiredMixin, View):
+class TaskDetailView(TodoOwnerRequiredMixin, DetailView):
+    model = Task
+    template_name = "task_detail.html"
+    context_object_name = "task"
     form_class = TaskUpdateForm
 
-    def get(self, request, task_id):
-        task = Task.objects.get(pk=task_id)
-        form = self.form_class(instance=task)
-        return render(request, "task_detail.html", {"task": task, "form": form})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = self.form_class(instance=self.object)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        task = self.get_object()
 
     def post(self, request, task_id):
         task = Task.objects.get(pk=task_id)
