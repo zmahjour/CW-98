@@ -90,6 +90,12 @@ def all_tasks(request):
         )
 
 
+class AllTasksView(ListView):
+    model = Task
+    template_name = "all_tasks.html"
+    context_object_name = "tasks"
+    ordering = "-id"
+
 def categories(request):
     if request.method == "POST":
         name = request.POST.get("category_name")
