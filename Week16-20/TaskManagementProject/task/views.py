@@ -45,7 +45,7 @@ class TaskDetailView(TodoOwnerRequiredMixin, DetailView):
             tag = Tag.objects.get(label=label)
             task.tags.add(tag)
 
-            return redirect("task_detail", task_id=task_id)
+            return redirect("task_detail", pk=task.pk)
 
         if "update_submit" in request.POST:
             form = self.form_class(request.POST, instance=task)
