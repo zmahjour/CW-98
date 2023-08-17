@@ -4,7 +4,7 @@ from task import views
 urlpatterns = [
     path("home/", views.home, name="home"),
     path("search/", views.search, name="search"),
-    path("detail/<int:task_id>/", views.TaskDetailView.as_view(), name="task_detail"),
+    path("detail/<int:pk>/", views.TaskDetailView.as_view(), name="task_detail"),
     path("all/", views.AllTasksView.as_view(), name="all_tasks"),
     path("categories/", views.AllCategoriesView.as_view(), name="categories"),
     path(
