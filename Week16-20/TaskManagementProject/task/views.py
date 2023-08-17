@@ -96,6 +96,13 @@ class AllTasksView(ListView):
     context_object_name = "tasks"
     ordering = "-id"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["cat_list"] = Category.objects.all()
+        context["tag_list"] = Tag.objects.all()
+        context["status_choices"] = dict(Task.STATUS_CHOICES)
+        return context
+
 def categories(request):
     if request.method == "POST":
         name = request.POST.get("category_name")
