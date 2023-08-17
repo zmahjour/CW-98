@@ -5,7 +5,7 @@ urlpatterns = [
     path("home/", views.home, name="home"),
     path("search/", views.search, name="search"),
     path("detail/<int:task_id>/", views.TaskDetailView.as_view(), name="task_detail"),
-    path("all/", views.all_tasks, name="all_tasks"),
+    path("all/", views.AllTasksView.as_view(), name="all_tasks"),
     path("categories/", views.categories, name="categories"),
     path(
         "category_detail/<int:category_id>/",
