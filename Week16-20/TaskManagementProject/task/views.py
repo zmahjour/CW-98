@@ -22,6 +22,33 @@ def search(request):
         return render(request, "search.html", {"search": search, "results": results})
 
 
+# class TaskDetailView(TodoOwnerRequiredMixin, View):
+#     form_class = TaskUpdateForm
+
+#     def get(self, request, task_id):
+#         task = Task.objects.get(pk=task_id)
+#         form = self.form_class(instance=task)
+#         return render(request, "task_detail.html", {"task": task, "form": form})
+
+#     def post(self, request, task_id):
+#         task = Task.objects.get(pk=task_id)
+#         if "tag_submit" in request.POST:
+#             label = request.POST.get("tag")
+#             if not Tag.objects.filter(label=label).exists():
+#                 Tag.objects.create(label=label)
+#             tag = Tag.objects.get(label=label)
+#             task.tags.add(tag)
+
+#             return redirect("task_detail", task_id=task_id)
+
+#         if "update_submit" in request.POST:
+#             form = self.form_class(request.POST, instance=task)
+#             if form.is_valid():
+#                 form.save()
+#                 return redirect("task_detail", task_id=task_id)
+#             return render(request, "task_detail.html", {"form": form})
+
+
 class TaskDetailView(TodoOwnerRequiredMixin, DetailView):
     model = Task
     template_name = "task_detail.html"
@@ -36,8 +63,6 @@ class TaskDetailView(TodoOwnerRequiredMixin, DetailView):
     def post(self, request, *args, **kwargs):
         task = self.get_object()
 
-    def post(self, request, task_id):
-        task = Task.objects.get(pk=task_id)
         if "tag_submit" in request.POST:
             label = request.POST.get("tag")
             if not Tag.objects.filter(label=label).exists():
@@ -55,45 +80,45 @@ class TaskDetailView(TodoOwnerRequiredMixin, DetailView):
             return render(request, "task_detail.html", {"form": form})
 
 
-def all_tasks(request):
-    cat_list = Category.objects.all()
-    tag_list = Tag.objects.all()
-    status_choices = dict(Task.STATUS_CHOICES)
+# def all_tasks(request):
+#     cat_list = Category.objects.all()
+#     tag_list = Tag.objects.all()
+#     status_choices = dict(Task.STATUS_CHOICES)
 
-    if request.method == "POST":
-        title = request.POST.get("title")
-        description = request.POST.get("description")
-        due_date = request.POST.get("due_date")
-        file = request.POST.get("file")
-        status = request.POST.get("status")
-        category_id = request.POST.get("cat")
-        category = Category.objects.get(pk=category_id)
-        tag_id_list = request.POST.getlist("tags")
-        tags = [Tag.objects.get(pk=tag_id) for tag_id in tag_id_list]
+#     if request.method == "POST":
+#         title = request.POST.get("title")
+#         description = request.POST.get("description")
+#         due_date = request.POST.get("due_date")
+#         file = request.POST.get("file")
+#         status = request.POST.get("status")
+#         category_id = request.POST.get("cat")
+#         category = Category.objects.get(pk=category_id)
+#         tag_id_list = request.POST.getlist("tags")
+#         tags = [Tag.objects.get(pk=tag_id) for tag_id in tag_id_list]
 
-        new_task = Task.objects.create(
-            title=title,
-            description=description,
-            due_date=due_date,
-            file=file,
-            status=status,
-            category=category,
-        )
-        new_task.tags.set(tags)
-        return redirect("all_tasks")
+#         new_task = Task.objects.create(
+#             title=title,
+#             description=description,
+#             due_date=due_date,
+#             file=file,
+#             status=status,
+#             category=category,
+#         )
+#         new_task.tags.set(tags)
+#         return redirect("all_tasks")
 
-    else:
-        tasks = Task.objects.all().order_by("-id")
-        return render(
-            request,
-            "all_tasks.html",
-            {
-                "tasks": tasks,
-                "cat_list": cat_list,
-                "tag_list": tag_list,
-                "status_choices": status_choices,
-            },
-        )
+#     else:
+#         tasks = Task.objects.all().order_by("-id")
+#         return render(
+#             request,
+#             "all_tasks.html",
+#             {
+#                 "tasks": tasks,
+#                 "cat_list": cat_list,
+#                 "tag_list": tag_list,
+#                 "status_choices": status_choices,
+#             },
+#         )
 
 
 class AllTasksView(ListView):
@@ -132,17 +157,17 @@ class AllTasksView(ListView):
         return redirect("all_tasks")
 
 
-def categories(request):
-    if request.method == "POST":
-        name = request.POST.get("category_name")
-        description = request.POST.get("description")
-        image = request.FILES.get("image")
-        Category.objects.create(name=name, description=description, image=image)
-        return redirect("categories")
+# def categories(request):
+#     if request.method == "POST":
+#         name = request.POST.get("category_name")
+#         description = request.POST.get("description")
+#         image = request.FILES.get("image")
+#         Category.objects.create(name=name, description=description, image=image)
+#         return redirect("categories")
 
-    elif request.method == "GET":
-        categories = Category.objects.all()
-        return render(request, "categories.html", {"categories": categories})
+#     elif request.method == "GET":
+#         categories = Category.objects.all()
+#         return render(request, "categories.html", {"categories": categories})
 
 
 class AllCategoriesView(ListView):
