@@ -158,6 +158,16 @@ class AllTasksView(ListView):
         return redirect("all_tasks")
 
 
+class TaskCreateView(CreateView):
+    model = Task
+    form_class = TaskCreateForm
+    template_name = "task_create.html"
+    success_url = reverse_lazy("all_tasks")
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
 # def categories(request):
 #     if request.method == "POST":
 #         name = request.POST.get("category_name")
