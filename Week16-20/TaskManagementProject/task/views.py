@@ -103,6 +103,29 @@ class AllTasksView(ListView):
         context["status_choices"] = dict(Task.STATUS_CHOICES)
         return context
 
+    def post(self, request, *args, **kwargs):
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        due_date = request.POST.get("due_date")
+        file = request.POST.get("file")
+        status = request.POST.get("status")
+        category_id = request.POST.get("cat")
+        category = Category.objects.get(pk=category_id)
+        tag_id_list = request.POST.getlist("tags")
+        tags = [Tag.objects.get(pk=tag_id) for tag_id in tag_id_list]
+
+        new_task = Task.objects.create(
+            title=title,
+            description=description,
+            due_date=due_date,
+            file=file,
+            status=status,
+            category=category,
+        )
+        new_task.tags.set(tags)
+        return redirect("all_tasks")
+
+
 def categories(request):
     if request.method == "POST":
         name = request.POST.get("category_name")
