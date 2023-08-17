@@ -51,7 +51,7 @@ class TaskDetailView(TodoOwnerRequiredMixin, DetailView):
             form = self.form_class(request.POST, instance=task)
             if form.is_valid():
                 form.save()
-                return redirect("task_detail", task_id=task_id)
+                return redirect("task_detail", pk=task.pk)
             return render(request, "task_detail.html", {"form": form})
 
 
