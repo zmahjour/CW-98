@@ -5,12 +5,11 @@ from .models import Task
 
 
 class TodoOwnerRequiredMixin:
-
     def dispatch(self, request, *args, **kwargs):
         print(kwargs)
-        task = Task.objects.get(pk=kwargs["task_id"])
+        task = Task.objects.get(pk=kwargs["pk"])
         if not request.user.is_authenticated:
             raise PermissionDenied
         if not task.user == request.user:
             raise PermissionDenied
-        return super().dispatch(request, *args, **kwargs)   
+        return super().dispatch(request, *args, **kwargs)
