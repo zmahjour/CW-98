@@ -139,6 +139,19 @@ def categories(request):
         return render(request, "categories.html", {"categories": categories})
 
 
+class AllCategoriesView(ListView):
+    model = Category
+    template_name = "categories.html"
+    context_object_name = "categories"
+
+    def post(self, request):
+        name = request.POST.get("category_name")
+        description = request.POST.get("description")
+        image = request.FILES.get("image")
+        Category.objects.create(name=name, description=description, image=image)
+        return redirect("categories")
+
+
 def category_detail(request, category_id):
     tag_list = Tag.objects.all()
     status_choices = dict(Task.STATUS_CHOICES)
